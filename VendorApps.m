@@ -40,6 +40,32 @@
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
 
+- (void)openURL:(CDVInvokedUrlCommand*)command
+{
+    CDVPluginResult *pluginResult = nil;
+
+    if ([command.arguments count] < 1) {
+        BSGLog(@"VendorApps: No URL specified?");
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"No URL specified"];
+    } else {
+        NSString *URLString = [command.arguments objectAtIndex:0];
+        NSURL *URL = [NSURL URLWithString:URLString];
+        if (!URL) {
+            BSGLog(@"VendorApps: Could not convert URLString to NSURL");
+            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Invalid URL"];
+        } else {
+            if ([[UIApplication sharedApplication] canOpenURL:URL]) {
+                [[UIApplication sharedApplication] openURL:URL];
+                pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+            } else {
+                pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Invalid URL"];
+            }
+        }
+    }
+
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+}
+
 - (void)showApp:(CDVInvokedUrlCommand*)command
 {
     CDVPluginResult *pluginResult = nil;

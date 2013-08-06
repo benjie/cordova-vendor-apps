@@ -20,6 +20,15 @@ it's name).
 Call this with the app id (e.g. 300935801) to open either the iTunes URL
 directly (multitasking) or if possible then an in-app StoreKit dialog.
 
-Callback is called with one argument: error. If this is `undefined` then
-the user was shown the app. We do not know if they installed it or not
-(even if they did then the install is probably still in progress).
+Callback is called with one argument: `error`. If this is `undefined`
+then the user was shown the app. We do not know if they installed it or
+not (even if they did then the install is probably still in progress).
+
+`window.plugins.vendorApps.openURL(url, callback)`
+
+Call this with a URL (e.g. "myappscheme://") to switch to the app (it
+uses `[[UIApplication sharedApplication] openURL:]` internally, thus
+it's name).
+
+Callback is called with one argument: `error`. If this is `undefined` then
+the we attempted to open the URL, otherwise we failed.

@@ -15,6 +15,7 @@
 @property (nonatomic, strong) NSString *showAppCallbackId;
 
 - (void)canOpenURL:(CDVInvokedUrlCommand*)command;
+- (void)openURL:(CDVInvokedUrlCommand*)command;
 - (void)showApp:(CDVInvokedUrlCommand*)command;
 
 @end
