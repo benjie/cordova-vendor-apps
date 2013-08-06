@@ -8,9 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import <Cordova/CDVPlugin.h>
+#import <StoreKit/StoreKit.h>
 
-@interface VendorApps : CDVPlugin
+@interface VendorApps : CDVPlugin <SKStoreProductViewControllerDelegate>
+
+@property (nonatomic, strong) NSString *showAppCallbackId;
 
 - (void)canOpenURL:(CDVInvokedUrlCommand*)command;
+- (void)showApp:(CDVInvokedUrlCommand*)command;
 
 @end

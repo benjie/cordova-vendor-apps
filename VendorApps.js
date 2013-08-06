@@ -20,6 +20,16 @@
     return cordova.exec(success, failure, service, 'canOpenURL', [url]);
   }
 
+  VendorApps.prototype.showApp = function(appId, callback) {
+    var success = function() {
+      callback();
+    }
+    var failure = function(error) {
+      callback(error);
+    }
+    return cordova.exec(success, failure, service, 'showApp', [appId]);
+  }
+
   cordova.addConstructor(function() {
     if (!window.plugins) window.plugins = {};
     window.plugins.vendorApps = new VendorApps();
